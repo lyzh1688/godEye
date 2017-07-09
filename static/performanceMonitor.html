@@ -1,0 +1,156 @@
+
+<div class="page-content" ng-controller="myCtrl" ng-init="initFunc()" >
+    <div class="portlet">
+        <div style="font-size: x-large;margin-left: 20px;">
+            <i class="icon-eye-open"></i> Performance Monitor
+        </div>
+        <div class="portlet-body">
+            <div class="container-fluid">
+				<div id="dashboard">
+                    <div class="row-fluid" style="margin-top:10px">
+                        <div class="span6" id="echart_demo" style="height:300px;width:700px"><chart time="time"></chart></div>
+                        <div>
+                           <table >
+                                <tr >
+                                    <td ><a href="{{ image1.url }}"><img ng-src="{{ image1.url }}" style="width:190px;height:275px;margin:10px" alt="Photo" /></a></td>
+                                    <td ><a href="{{ image2.url }}"><img ng-src="{{ image2.url }}" style="width:190px;height:275px;margin:10px" alt="Photo" /></a></td>
+                                    <td ><a href="{{ image3.url }}"><img ng-src="{{ image3.url }}" style="width:190px;height:275px;margin:10px" alt="Photo" /></a></td>
+                                </tr>
+                               <tr>
+                                   <td style="text-align:center;">{{ image1.time }}</td>
+                                   <td style="text-align:center;">{{ image2.time }}</td>
+                                   <td style="text-align:center;">{{ image3.time }}</td>
+                               </tr>
+                            </table>
+                        </div>
+					</div>
+
+				</div>
+			</div>
+            <div class="container-fluid">
+                <div style="margin-top: 10px;">
+                    <form style="margin:none!important">
+                          <span class="tabbable tabbable-custom">
+                                <ul class="nav nav-bar">
+                                    <li class="{{ firstActive }}"><a ng-click="setFirstActive()" >Resource</a></li>
+                                    <li class="{{ secondActive }}"><a ng-click="setSecondActive()" >Network</a></li>
+                                    <li class="{{ thirdActive }}"><a ng-click="setThirdActive()" >Exception</a></li>
+                                </ul>
+
+
+                                <div class="btn-group" style="float:right;margin-left:20px">
+                                    <button class="btn-link" data-toggle="dropdown" >
+                                            Columns
+                                            <i class="icon-angle-down"></i>
+                                    </button>
+                                    <div id="sample_2_column_toggler" class="dropdown-menu hold-on-click dropdown-checkboxes">
+                                        <div ng-repeat='column in columns'>
+                                             <label><input type="checkbox" checked ng-click="select(column.id,$event)" data-column="{{ column.id }}">{{ column.name }}</label>
+                                        </div>
+                                    </div>
+                                 </div>
+                                <button class=" btn-link" type="button" style="float:right;margin-left:20px"><i class="icon-download-alt"></i> Export</button>
+
+
+                                <span style="float:left;margin-left:10px">
+                                    <input type="text" placeholder="Size" style="width:50px;border-width: 0px;border-bottom-width: 2px;padding-left: 30px;"/>
+                                    <span>(KB)</span>
+                                </span>
+
+                                <span style="float:left;margin-left:20px">
+                                    <input type="text" placeholder="Time" style="width:50px;border-width: 0px;border-bottom-width: 2px;padding-left: 30px;"/>
+                                    <span>(S)</span>
+                                </span>
+
+                                <span style="float:left;margin-left:20px">
+                                    <input type="text"  placeholder="Code" style="width:50px;border-width: 0px;border-bottom-width: 2px;padding-left: 30px;"/>
+                                </span>
+
+
+
+                          </span>
+                    </form>
+
+                    <div class="tab-content" >
+                            <div class="tab-pane {{ firstActive }}" id="tab_1_1">
+                                <div style="border: 1px solid #eee;">
+                                    <div class="portlet-body" style="overflow:auto;width:100%;height:300px">
+                                        <table  class="table table-bordered table-striped table-condensed cf" id="sample_2" >
+                                            <thead>
+                                                <tr>
+                                                    <th style="display:{{ column1Hidden }} ;white-space: nowrap;">#</th>
+                                                    <th style="display:{{ column2Hidden }} ;white-space: nowrap;">method</th>
+                                                    <th style="display:{{ column3Hidden }} ;white-space: nowrap;">code</th>
+                                                    <th style="display:{{ column4Hidden }} ;white-space: nowrap;">host</th>
+                                                    <th style="display:{{ column5Hidden }} ;white-space: nowrap;">path</th>
+                                                    <th style="display:{{ column6Hidden }} ;white-space: nowrap;">mime type</th>
+                                                    <th style="display:{{ column7Hidden }} ;white-space: nowrap;">time</th>
+                                                    <th style="display:{{ column8Hidden }} ;white-space: nowrap;">size</th>
+                                                </tr>
+
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="item in items">
+                                                    <td style="display:{{column1Hidden}} ;white-space: nowrap;  ">{{ item.column1 }}</td>
+                                                    <td style="display:{{column2Hidden}} ;white-space: nowrap; ">{{ item.column2 }}</td>
+                                                    <td style="display:{{column3Hidden}} ;white-space: nowrap; ">{{ item.column3 }}</td>
+                                                    <td style="display:{{ column4Hidden }} ;white-space: nowrap; ">{{ item.column4 }}</td>
+                                                    <td style="display:{{ column5Hidden }} ;white-space: nowrap; ">{{ item.column5 }}</td>
+                                                    <td style="display:{{ column6Hidden }} ;white-space: nowrap; ">{{ item.column6 }}</td>
+                                                    <td style="display:{{ column7Hidden }} ;white-space: nowrap; ">{{ item.column7 }}</td>
+                                                    <td style="display:{{ column8Hidden }} ;white-space: nowrap; ">{{ item.column8 }}</td>
+
+                                                </tr>
+                                            </tbody>
+
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane {{ secondActive }}" id="tab_1_2">
+
+                                <p>Howdy, I'm in Section 2.</p>
+
+                                <p>
+
+                                    Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat. Ut wisi enim ad minim veniam, quis nostrud exerci tation.
+
+                                </p>
+
+                                <p>
+
+                                    <a class="btn green" href="ui_tabs_accordions.html#tab_1_2" target="_blank">Activate this tab via URL</a>
+
+                                </p>
+
+                            </div>
+                            <div class="tab-pane {{ thirdActive }}" id="tab_1_3">
+
+                                <p>Howdy, I'm in Section 3.</p>
+
+                                <p>
+
+                                    Duis autem vel eum iriure dolor in hendrerit in vulputate.
+
+                                    Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat
+
+                                </p>
+
+                                <p>
+
+                                    <a class="btn yellow" href="ui_tabs_accordions.html#tab_1_3" target="_blank">Activate this tab via URL</a>
+
+                                </p>
+
+                            </div>
+                        </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
